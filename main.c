@@ -2,6 +2,7 @@
 
 int main( void ){
 	while(1){
+		GPIO_InitTypeDef gpio;
 		
 	}
 }
