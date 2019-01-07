@@ -14,16 +14,16 @@ void delay_ms(int t){
 }
 
 int main( void ){
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+	
 	GPIO_InitTypeDef gpio;
 	GPIO_StructInit(&gpio);
-		
-	SysTick_Config(SystemCoreClock / 1000);
-	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 	
 	gpio.GPIO_Pin = GPIO_Pin_9;
 	gpio.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOC, &gpio);
+	
+	SysTick_Config(SystemCoreClock / 1000);
 	
 	while(1){
 		GPIO_SetBits(GPIOC, GPIO_Pin_9);

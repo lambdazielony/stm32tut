@@ -6,8 +6,8 @@ Section Cross References
 
     main.o(i.SysTick_Handler) refers to main.o(.data) for time_ms
     main.o(i.delay_ms) refers to main.o(.data) for time_ms
-    main.o(i.main) refers to stm32f10x_gpio.o(i.GPIO_StructInit) for GPIO_StructInit
     main.o(i.main) refers to stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
+    main.o(i.main) refers to stm32f10x_gpio.o(i.GPIO_StructInit) for GPIO_StructInit
     main.o(i.main) refers to stm32f10x_gpio.o(i.GPIO_Init) for GPIO_Init
     main.o(i.main) refers to stm32f10x_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
     main.o(i.main) refers to main.o(i.delay_ms) for delay_ms
