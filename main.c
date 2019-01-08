@@ -41,6 +41,12 @@ int main( void ){
 	
 	ADC_Cmd(ADC1, ENABLE);
 	
+	ADC_ResetCalibration(ADC1);
+	while(ADC_GetResetCalibrationStatus(ADC1));
+	
+	ADC_StartCalibration(ADC1);
+	while(ADC_GetCalibrationStatus(ADC1));
+	
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 		
 	SysTick_Config(SystemCoreClock / 1000);
