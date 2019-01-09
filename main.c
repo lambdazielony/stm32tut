@@ -22,6 +22,12 @@ void send_string( const char* s){
 		send_char(*s++);
 }
 
+void send_int( int i){
+	char buffer[10];
+	sprintf(buffer, "%d", i);
+	send_string(buffer);
+}
+
 int main( void ){
 	
 	//podlaczenie portu GPIOA oraz GPIOC do linii zegara takutjacego 
@@ -95,10 +101,8 @@ int main( void ){
 	
 	while(1){
 		send_string("Wartosc ADC wynosi: ");
-		
-		char buffer[10];
-		sprintf(buffer, "%d\n\r", ADC_GetConversionValue(ADC1));
-		send_string(buffer);
+		send_int(ADC_GetConversionValue(ADC1));
+		send_string("\n\r");
 		
 		delay_ms(100);
 		
