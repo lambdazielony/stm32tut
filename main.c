@@ -100,9 +100,15 @@ int main( void ){
 		sprintf(buffer, "%d\n\r", ADC_GetConversionValue(ADC1));
 		send_string(buffer);
 		
-		GPIO_SetBits(GPIOC, GPIO_Pin_9);
-		delay_ms(ADC_GetConversionValue(ADC1));
-		GPIO_ResetBits(GPIOC, GPIO_Pin_9);
-		delay_ms(ADC_GetConversionValue(ADC1));
+		delay_ms(100);
+		
+		if(USART_GetFlagStatus(USART2, USART_FLAG_RXNE)){
+			char c = USART_ReceiveData(USART2);
+			switch(c){
+				case 'q' : GPIO_SetBits(GPIOC, GPIO_Pin_9); break;
+				case 'a' : GPIO_ResetBits(GPIOC, GPIO_Pin_9); break;
+				default: GPIO_ResetBits(GPIOC, GPIO_Pin_9); break;
+			}
+		}
 	}
 }
