@@ -1,6 +1,7 @@
 #include "stm32f10x.h"
 
 volatile uint32_t time_ms = 0;
+uint16_t delay = 100;
 
 void SysTick_Handler(){
 	if(time_ms)
@@ -104,14 +105,19 @@ int main( void ){
 		send_int(ADC_GetConversionValue(ADC1));
 		send_string("\n\r");
 		
-		delay_ms(100);
+		GPIO_SetBits(GPIOC, GPIO_Pin_9);
+		delay_ms(delay);
+		GPIO_ResetBits(GPIOC, GPIO_Pin_9);
+		delay_ms(delay);
 		
 		if(USART_GetFlagStatus(USART2, USART_FLAG_RXNE)){
 			char c = USART_ReceiveData(USART2);
 			switch(c){
-				case 'q' : GPIO_SetBits(GPIOC, GPIO_Pin_9); break;
-				case 'a' : GPIO_ResetBits(GPIOC, GPIO_Pin_9); break;
-				default: GPIO_ResetBits(GPIOC, GPIO_Pin_9); break;
+				case '1' : delay = 10; break;
+				case '2' : delay = 100; break;
+				case '3' : delay = 500; break;
+				case '4' : delay = 1000; break;
+				default: delay = 100; break;
 			}
 		}
 	}
